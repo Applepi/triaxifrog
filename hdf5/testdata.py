@@ -28,7 +28,7 @@ with h5py.File('ifrog.hdf5', 'r') as f:
 #hf = h5py.File('test.hdf5', 'r')
 #hf.close()
 
-## No fucking worko
+### Needs work to get working
 #for i in stepdata:
 #    print(stepdata[i])
 #    value = stepdata[i]
