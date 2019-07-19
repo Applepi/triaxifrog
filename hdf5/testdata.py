@@ -3,7 +3,6 @@ import numpy as np
 import sys
 import matplotlib.pyplot as plt
 
-hf = h5py.File('test.hdf5', 'r')
 
 filename1 = sys.argv[1]
 filename2 = sys.argv[2]
@@ -12,11 +11,13 @@ testdata = np.loadtxt(filename1, delimiter="\t")
 testdata = testdata.astype(int)
 posdata = np.loadtxt(filename2, delimiter="\t")
 
-with h5py.File('test2.hdf5', 'w') as f:
+with h5py.File('ifrog.hdf5', 'w') as f:
     dset = f.create_dataset(filename1, data=testdata)
     dset = f.create_dataset(filename2, data=posdata)
+
+hf = h5py.File('ifrog.hdf5', 'r')
     
-with h5py.File('test2.hdf5', 'r') as f:
+with h5py.File('ifrog.hdf5', 'r') as f:
    data = f[filename1]
    stepdata = f[filename2]
    plt.matshow(testdata, aspect='auto', vmin=1000, vmax=16000)
