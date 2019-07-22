@@ -23,12 +23,31 @@ if len(sys.argv) == 4:
         plt.show()
         f.close()
     if command in ['poscoro']:
-        f = h5py.File('ifrog.hdf5', 'r')
+        #print(len(f[filename2]))
+        index = -1 
+        f = h5py.File('ifrog.hdf5', 'r+')
+        corodata = f[filename2]
         for i in f[filename2]:
-            i = (i+9858.6325) * (10e-6) * (2/(3*10e8))
+            #print(i)
+            index = index + 1 
+            #print(index)
+            #Magic number to set data around t=0
+            magicnum = 9858.6325
+            i = (i + magicnum) * (10e-6) * (2/(3*10e8))
+            corodata[index] = i
             ##stepvalue(um)*10^-6*2/3*10^8
             #-9858.6325 = t=0
-            print(i)
+            #print(i)
+        index = -1
+        for i in f[filename1]:
+            index = index + 1
+            #print(index)
+            wl = -0.81967 * index + 440
+            print(wl)
+            #pix num to WL
+            #y=-0.081967x+440
+           # #x = pixnum
+            #y = wl (nm)
         f.close()
     if command in ['import']:
         testdata = np.loadtxt(filename1, delimiter="\t")
