@@ -18,13 +18,18 @@ else:
 if len(sys.argv) == 4:
     print(command + ' starting')
     if command in ['plot']:
-        
-        plt.matshow(testdata, aspect='auto', vmin=1000, vmax=16000)
+        f = h5py.File('ifrog.hdf5', 'r')
+        plt.matshow(f[filename1], aspect='auto', vmin=1000, vmax=16000)
         plt.show()
+        f.close()
     if command in ['poscoro']:
-        for i in stepdata:
+        f = h5py.File('ifrog.hdf5', 'r')
+        for i in f[filename2]:
+            i = (i+9858.6325) * (10e-6) * (2/(3*10e8))
+            ##stepvalue(um)*10^-6*2/3*10^8
+            #-9858.6325 = t=0
             print(i)
-        hf.close()
+        f.close()
     if command in ['import']:
         testdata = np.loadtxt(filename1, delimiter="\t")
         testdata = testdata.astype(int)
