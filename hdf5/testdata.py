@@ -33,7 +33,7 @@ if len(sys.argv) == 4:
         sorted_coro = corodata[coroinds[:-1]]
         sorted_grid = f[filename1][::,::][:,coroinds[:-1]]
         
-
+        #Test Simulted Waveform
         ft = pypret.FourierTransform(256, dt=2.5e-15)
         pulse = pypret.Pulse(ft, 400e-9)
         pulse.spectrum = pypret.lib.gaussian(pulse.wl, x0=800e-9, sigma=20e-9)
@@ -93,29 +93,3 @@ if len(sys.argv) == 4:
             f.create_dataset(filename2+'coro', data=posdata)
             f.create_dataset('corowl', data=np.zeros((1021)))
         print(command + ' complete')
-
-
-
-
-
-#hfr = h5py.File('ifrog.hdf5', 'r')
-#hfw = h5py.File('ifrog.hdf5', 'w')
-    
-#with h5py.File('ifrog.hdf5', 'r') as f:
-#   data = f[filename1]
-#   stepdata = f[filename2]
-
-        
-#stepdata = hf.get('20190717_880_bbo2_pos')
-
-#hf = h5py.File('test.hdf5', 'r')
-#hf.close()
-
-### Needs work to get working
-#for i in stepdata:
-#    print(i)
-#    value = stepdata[i]
-#    newvalue = stepdata[i] * 10e-6 * 2 / 3 * 10e8
-#    stepdata[i] = newvalue
-    
-##stepvalue(um)*10^-6*2/3*10^8
